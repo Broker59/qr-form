@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hediye Başvuru Formu</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fff8e7, #f5ead0);
+      color: #172033;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header .icon {
+      font-size: 50px;
+    }
+
+    .header h1 {
+      margin: 8px 0;
+      font-size: 28px;
+    }
+
+    .header p {
+      color: #666;
+    }
+
+    .form-box {
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.10);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+      margin-top: 16px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d6d6d6;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #d39b19;
+    }
+
+    .gift-title {
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .gifts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .gift {
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      padding: 14px 5px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .gift input {
+      margin-bottom: 8px;
+    }
+
+    .gift span {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .shipping {
+      margin-top: 18px;
+      padding: 15px;
+      border: 1px solid #79b487;
+      border-radius: 14px;
+      background: #f4fff5;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    .shipping input {
+      width: 20px;
+      height: 20px;
+    }
+
+    .iban-title {
+      font-weight: bold;
+      margin-top: 22px;
+      margin-bottom: 10px;
+    }
+
+    .iban-box {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .iban-box input {
+      min-width: 0;
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .copy {
+      border: none;
+      border-radius: 10px;
+      padding: 0 14px;
+      background: #172033;
+      color: white;
+      cursor: pointer;
+    }
+
+    .send {
+      width: 100%;
+      margin-top: 22px;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: #d99f1b;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .send:active {
+      transform: scale(.98);
+    }
+
+    .notice {
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 12px;
+      text-align: center;
+      display: none;
+    }
+
+    .success {
+      background: #e8f8eb;
+      color: #176b2c;
+    }
+
+    .error {
+      background: #fff0f0;
+      color: #a52222;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    @media (max-width: 430px) {
+      .gifts {
+        grid-template-columns: 1fr;
+      }
+
+      .iban-box {
+        flex-direction: column;
+      }
+
+      .copy {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="icon">🎁</div>
+    <h1>Hediye Başvuru Formu</h1>
+    <p>Bilgilerinizi doldurun ve hediyenizi seçin.</p>
+  </div>
+
+  <div class="form-box">
+
+    <label for="name">İsim Soyisim</label>
+    <input type="text" id="name" placeholder="Adınız ve soyadınız">
+
+    <label for="address">Adres</label>
+    <textarea id="address" placeholder="Teslimat adresiniz"></textarea>
+
+    <label for="phone">İletişim Telefonu</label>
+    <input type="tel" id="phone" placeholder="05XX XXX XX XX">
+
+    <div class="gift-title">🎁 Seçtiğiniz Hediye</div>
+
+    <div class="gifts">
+
+      <label class="gift">
+        <input type="radio" name="gift" value="Anahtarlık">
+        <span>🔑 Anahtarlık</span>
+      </label>
+
+      <label class="gift">
+        <input type="radio" name="gift" value="Cep Parfümü">
+        <span>🌸 Cep Parfümü</span>
+      </label>
+
+      <label class="gift">
+        <input type="radio" name="gift" value="Kupa">
+        <span>☕ Kupa</span>
+      </label>
+
+    </div>
+
+    <label class="shipping">
+      <input type="checkbox" id="shipping">
+      🚚 Kargo ücretsiz
+    </label>
+
+    <div class="iban-title">💳 IBAN Bilgileri</div>
+
+    <div class="iban-box">
+      <input id="iban1"
+        value="TR38 0006 7010 0000 0026 4414 20"
+        readonly>
+      <button class="copy" onclick="copyIBAN('iban1')">
+        Kopyala
+      </button>
+    </div>
+
+    <div class="iban-box">
+      <input id="iban2"
+        value="TR75 0004 6005 6388 8000 2007 24"
+        readonly>
+      <button class="copy" onclick="copyIBAN('iban2')">
+        Kopyala
+      </button>
+    </div>
+
+    <button class="send" onclick="sendForm()">
+      📩 FORMU GÖNDER
+    </button>
+
+    <div id="success" class="notice success">
+      ✅ Formunuz hazırlandı.
+    </div>
+
+    <div id="error" class="notice error">
+      ⚠️ Lütfen tüm alanları doldurun ve seçimleri tamamlayın.
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Bilgilerinizi eksiksiz doldurunuz.
+  </div>
+
+</div>
+
+<script>
+
+function copyIBAN(id) {
+  const input = document.getElementById(id);
+
+  navigator.clipboard.writeText(input.value).then(function() {
+    alert("IBAN kopyalandı ✓");
+  });
+}
+
+function sendForm() {
+
+  const name = document.getElementById("name").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const gift = document.querySelector('input[name="gift"]:checked');
+  const shipping = document.getElementById("shipping").checked;
+
+  const success = document.getElementById("success");
+  const error = document.getElementById("error");
+
+  success.style.display = "none";
+  error.style.display = "none";
+
+  if (!name || !address || !phone || !gift || !shipping) {
+    error.style.display = "block";
+    return;
+  }
+
+  success.style.display = "block";
+
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
+
+</script>
+
+</body>
+</html>
