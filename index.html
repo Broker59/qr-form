@@ -325,14 +325,38 @@ function sendForm() {
   if (!name || !address || !phone || !gift || !shipping) {
     error.style.display = "block";
     return;
-  }
+  
+const formData = new FormData();
 
-  success.style.display = "block";
+formData.append("İsim Soyisim", name);
+formData.append("Adres", address);
+formData.append("İletişim Telefonu", phone);
+formData.append("Seçilen Hediye", gift);
+formData.append("Kargo", shipping ? "Ücretsiz Kargo" : "Hayır");
 
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
+fetch("https://formspree.io/f/mdenyyja", {
+    method: "POST",
+    body: formData,
+    headers: {
+        "Accept": "application/json"
+    }
+})
+.then(response => {
+    if (response.ok) {
+        success.style.display = "block";
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+    } else {
+        error.style.display = "block";
+    }
+})
+.catch(() => {
+    error.style.display = "block";
+});
+  
 }
 
 </script>
