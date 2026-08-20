@@ -309,55 +309,55 @@ function copyIBAN(id) {
 }
 
 function sendForm() {
+    const name = document.getElementById("name").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const phone = document.getElementById("phone").value.trim();
 
-  const name = document.getElementById("name").value.trim();
-  const address = document.getElementById("address").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const giftElement = document.querySelector('input[name="gift"]:checked');
-  const gift = giftElement ? giftElement.value : "";
-  const shipping = document.getElementById("shipping").checked;
+    const giftElement = document.querySelector('input[name="gift"]:checked');
+    const gift = giftElement ? giftElement.value : "";
 
-  const success = document.getElementById("success");
-  const error = document.getElementById("error");
+    const shipping = document.getElementById("shipping").checked;
 
-  success.style.display = "none";
-  error.style.display = "none";
+    const success = document.getElementById("success");
+    const error = document.getElementById("error");
 
-  if (!name || !address || !phone || !gift || !shipping) {
-    error.style.display = "block";
-    return;
-  
-const formData = new FormData();
+    success.style.display = "none";
+    error.style.display = "none";
 
-formData.append("İsim Soyisim", name);
-formData.append("Adres", address);
-formData.append("İletişim Telefonu", phone);
-formData.append("Seçilen Hediye", gift);
-formData.append("Kargo", shipping ? "Ücretsiz Kargo" : "Hayır");
-
-fetch("https://formspree.io/f/mdenyyja", {
-    method: "POST",
-    body: formData,
-    headers: {
-        "Accept": "application/json"
-    }
-})
-.then(response => {
-    if (response.ok) {
-        success.style.display = "block";
-
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth"
-        });
-    } else {
+    if (!name || !address || !phone || !gift || !shipping) {
         error.style.display = "block";
+        return;
     }
-})
-.catch(() => {
-    error.style.display = "block";
-});
-  
+
+    const formData = new FormData();
+
+    formData.append("İsim Soyisim", name);
+    formData.append("Adres", address);
+    formData.append("İletişim Telefonu", phone);
+    formData.append("Seçilen Hediye", gift);
+    formData.append("Kargo", "Ücretsiz Kargo");
+
+    fetch("https://formspree.io/f/mdenyyja", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Accept": "application/json"
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            success.style.display = "block";
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+        } else {
+            error.style.display = "block";
+        }
+    })
+    .catch(() => {
+        error.style.display = "block";
+    });
 }
 
 </script>
