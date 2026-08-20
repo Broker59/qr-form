@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hediye Başvuru Formu</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:20px;
+  font-family:Arial,sans-serif;
+  color:#172033;
+  background:linear-gradient(135deg,#fff8e7,#ffe8c7);
+}
+.container{max-width:600px;margin:auto}
+.header{text-align:center;padding:25px 10px}
+.gift{font-size:64px}
+h1{font-size:34px;margin:8px 0}
+.subtitle{font-size:18px;color:#666}
+.form-box{
+  background:#fff;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 8px 30px rgba(0,0,0,.10)
+}
+label{display:block;font-weight:bold;margin:16px 0 7px}
+input[type=text],input[type=tel],textarea{
+  width:100%;
+  padding:17px;
+  border:1px solid #ccc;
+  border-radius:14px;
+  font-size:17px;
+  outline:none;
+}
+textarea{min-height:110px;resize:vertical}
+.choice{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid #ddd;
+  border-radius:15px;
+  padding:17px;
+  margin:10px 0;
+  cursor:pointer;
+}
+.choice input{width:20px;height:20px}
+.shipping{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:20px 0;
+  font-weight:bold;
+}
+.shipping input{width:20px;height:20px}
+.iban-box{
+  background:#f5f5f5;
+  border-radius:14px;
+  padding:16px;
+  margin-top:20px;
+}
+.iban-title{font-weight:bold;margin-bottom:8px}
+.iban-row{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+.iban-row:last-child{margin-bottom:0}
+.iban-row input{
+  flex:1;
+  min-width:0;
+  font-size:14px;
+  padding:14px 10px;
+}
+.copy{
+  border:0;
+  border-radius:10px;
+  padding:0 14px;
+  background:#172033;
+  color:white;
+  font-weight:bold;
+}
+button[type=submit]{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:18px;
+  background:#e53935;
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:20px;
+}
+.note{
+  text-align:center;
+  color:#777;
+  font-size:13px;
+  margin-top:18px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="gift">🎁</div>
+    <h1>Hediye Başvuru Formu</h1>
+    <div class="subtitle">Bilgilerinizi doldurun ve hediyenizi seçin.</div>
+  </div>
+
+  <div class="form-box">
+
+    <!-- Formspree: doğrudan POST gönderimi -->
+    <form action="https://formspree.io/f/mdenyyja" method="POST">
+
+      <input type="hidden" name="_subject" value="Yeni Hediye Başvurusu">
+
+      <label for="name">İsim Soyisim</label>
+      <input
+        id="name"
+        name="isim_soyisim"
+        type="text"
+        placeholder="Adınız ve soyadınız"
+        required
+      >
+
+      <label for="address">Adres</label>
+      <textarea
+        id="address"
+        name="adres"
+        placeholder="Teslimat adresiniz"
+        required
+      ></textarea>
+
+      <label for="phone">İletişim Telefonu</label>
+      <input
+        id="phone"
+        name="telefon"
+        type="tel"
+        placeholder="05XX XXX XX XX"
+        required
+      >
+
+      <label>🎁 Seçtiğiniz Hediye</label>
+
+      <label class="choice">
+        <input type="radio" name="hediye" value="Anahtarlık" required>
+        🔑 Anahtarlık
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="hediye" value="Cep Parfümü">
+        🌸 Cep Parfümü
+      </label>
+
+      <label class="choice">
+        <input type="radio" name="hediye" value="Kupa">
+        ☕ Kupa
+      </label>
+
+      <label class="shipping">
+        <input type="checkbox" name="kargo" value="Ücretsiz Kargo" required>
+        🚚 Ücretsiz Kargo
+      </label>
+
+      <div class="iban-box">
+        <div class="iban-title">💳 Ödeme IBAN'ları</div>
+
+        <div class="iban-row">
+          <input
+            id="iban1"
+            type="text"
+            value="TR38 0006 7010 0000 0026 4414 20"
+            readonly
+          >
+          <button class="copy" type="button" onclick="copyIBAN('iban1')">
+            Kopyala
+          </button>
+        </div>
+
+        <div class="iban-row">
+          <input
+            id="iban2"
+            type="text"
+            value="TR75 0004 6005 6388 8000 2007 24"
+            readonly
+          >
+          <button class="copy" type="button" onclick="copyIBAN('iban2')">
+            Kopyala
+          </button>
+        </div>
+      </div>
+
+      <button type="submit">📩 FORMU GÖNDER</button>
+
+      <div class="note">
+        Bilgilerinizi eksiksiz doldurup formu gönderiniz.
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script>
+function copyIBAN(id){
+  const input=document.getElementById(id);
+  navigator.clipboard.writeText(input.value).then(function(){
+    alert("IBAN kopyalandı ✓");
+  }).catch(function(){
+    input.select();
+    document.execCommand("copy");
+    alert("IBAN kopyalandı ✓");
+  });
+}
+</script>
+
+</body>
+</html>
