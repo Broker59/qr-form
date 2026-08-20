@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hediye Formu</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 480px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 28px 22px;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.12);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 28px;
+      color: #222;
+    }
+
+    .description {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field > label,
+    .section-title {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #555;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .gift-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .gift-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fafafa;
+    }
+
+    .gift-option:hover {
+      background: #f2f2f2;
+    }
+
+    .gift-option input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+
+    .iban-section {
+      margin-top: 24px;
+    }
+
+    .iban-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+
+    .iban-number {
+      flex: 1;
+      min-width: 0;
+      font-family: monospace;
+      font-size: 14px;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      flex: 0 0 auto;
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: #222;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .copy-btn:hover {
+      background: #444;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 15px;
+      border: 0;
+      border-radius: 11px;
+      background: #111;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #333;
+    }
+
+    .message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .success {
+      background: #e9f8ed;
+      color: #176b2c;
+    }
+
+    .error {
+      background: #fff0f0;
+      color: #a40000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>🎁 Hediye Formu</h1>
+    <div class="description">Bilgilerinizi doldurun ve hediyenizi seçin.</div>
+
+    <form id="giftForm" action="https://formspree.io/f/mdenyyja" method="POST">
+      <input type="hidden" name="_subject" value="Yeni Hediye Formu Başvurusu">
+      <input type="hidden" name="_replyto" id="replyTo">
+
+
+      <div class="field">
+        <label for="name">İsim Soyisim</label>
+        <input id="name" name="name" type="text" placeholder="İsim ve soyisim" required>
+      </div>
+
+      <div class="field">
+        <label for="address">Adres Bilgisi</label>
+        <textarea id="address" name="address" placeholder="Açık adresiniz" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="phone">İletişim Bilgisi / Tel No</label>
+        <input id="phone" name="phone" type="tel" placeholder="05XX XXX XX XX" required>
+      </div>
+
+      <div class="field">
+        <div class="section-title">Hediyeni Seç</div>
+
+        <div class="gift-options">
+          <label class="gift-option">
+            <input type="radio" name="gift" value="Anahtarlık" required>
+            <span>🔑 Anahtarlık</span>
+          </label>
+
+          <label class="gift-option">
+            <input type="radio" name="gift" value="Cep Parfümü">
+            <span>🌸 Cep Parfümü</span>
+          </label>
+
+          <label class="gift-option">
+            <input type="radio" name="gift" value="Kupa">
+            <span>☕ Kupa</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="iban-section">
+        <div class="section-title">IBAN Bilgileri</div>
+
+        <!-- IBAN 1: Buradaki numarayı kendi IBAN'ınızla değiştirin -->
+        <div class="iban-row">
+          <div class="iban-number" id="iban1">IBAN 1: TR75 0004 6005 6388 8000 2007 24</div>
+          <button type="button" class="copy-btn" onclick="copyIban('iban1', this)">Kopyala</button>
+        </div>
+
+        <!-- IBAN 2: Buradaki numarayı kendi IBAN'ınızla değiştirin -->
+        <div class="iban-row">
+          <div class="iban-number" id="iban2">IBAN 2: TR38 0006 7010 0000 0026 4414 20</div>
+          <button type="button" class="copy-btn" onclick="copyIban('iban2', this)">Kopyala</button>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Formu Gönder</button>
+
+      <div id="successMessage" class="message success">
+        Formunuz başarıyla gönderilmeye hazırlandı. ✅
+      </div>
+
+      <div id="errorMessage" class="message error">
+        Lütfen tüm alanları eksiksiz doldurun.
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    function copyIban(id, button) {
+      const text = document.getElementById(id).textContent
+        .replace(/^IBAN [12]:\s*/, '')
+        .trim();
+
+      navigator.clipboard.writeText(text).then(() => {
+        const oldText = button.textContent;
+        button.textContent = 'Kopyalandı ✓';
+        setTimeout(() => {
+          button.textContent = oldText;
+        }, 1500);
+      }).catch(() => {
+        alert('IBAN: ' + text);
+      });
+    }
+
+    document.getElementById('giftForm').addEventListener('submit', function(e) {
+      const form = e.target;
+      const success = document.getElementById('successMessage');
+      const error = document.getElementById('errorMessage');
+
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        error.style.display = 'block';
+        success.style.display = 'none';
+        form.reportValidity();
+        return;
+      }
+
+      // Formspree will handle the actual submission.
+      error.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
