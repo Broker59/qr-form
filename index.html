@@ -313,7 +313,8 @@ function sendForm() {
   const name = document.getElementById("name").value.trim();
   const address = document.getElementById("address").value.trim();
   const phone = document.getElementById("phone").value.trim();
-  const gift = document.querySelector('input[name="gift"]:checked');
+  const giftElement = document.querySelector('input[name="gift"]:checked');
+  const gift = giftElement ? giftElement.value : "";
   const shipping = document.getElementById("shipping").checked;
 
   const success = document.getElementById("success");
